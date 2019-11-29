@@ -19,7 +19,11 @@ public class Categoria implements Serializable{
 	
 	private String nome;
 	
+	
+	//Metodos construtores
 	public Categoria() {}
+	
+	
 	
 	public Categoria(Integer id, String nome) {
 		super();
@@ -28,6 +32,8 @@ public class Categoria implements Serializable{
 	}
 	
 	
+	
+	//Metodos gettes  e settes
 	public Integer getId() {
 		return id;
 	}
