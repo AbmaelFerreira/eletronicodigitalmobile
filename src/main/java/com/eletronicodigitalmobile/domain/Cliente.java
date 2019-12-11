@@ -2,25 +2,35 @@ package com.eletronicodigitalmobile.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.eletronicodigitalmobile.domain.enums.TipoCliente;
 
+@Entity
 public class Cliente implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
-	private String nomeString;
-	private String emailString;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String nome;
+	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
-	private Endereco enderecos;
+	@OneToMany(mappedBy = "cliente")
+	private List<Endereco> enderecos;
 	
 	@ElementCollection 
 	@CollectionTable(name ="TELEFONE")  
@@ -30,37 +40,37 @@ public class Cliente implements Serializable{
 		
 	}
 
-	public Cliente(int id, String nomeString, String emailString, String cpfOuCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
-		this.nomeString = nomeString;
-		this.emailString = emailString;
+		this.nome = nome;
+		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = tipo.getCod();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getNomeString() {
-		return nomeString;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeString(String nomeString) {
-		this.nomeString = nomeString;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getEmailString() {
-		return emailString;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailString(String emailString) {
-		this.emailString = emailString;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getCpfOuCnpj() {
@@ -79,13 +89,19 @@ public class Cliente implements Serializable{
 		this.tipo = tipo.getCod();
 	}
 
-	public Endereco getEnderecos() {
+//	public void setTipo(Integer tipo) {
+//		this.tipo = tipo;
+//	}
+
+	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Endereco enderecos) {
+	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+
+	
 
 	public Set<String> getTelefones() {
 		return telefones;
@@ -99,7 +115,7 @@ public class Cliente implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -112,10 +128,14 @@ public class Cliente implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+
 	
 	
 	
