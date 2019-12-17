@@ -1,8 +1,10 @@
 package com.eletronicodigitalmobile;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.hibernate.engine.query.spi.sql.NativeSQLQueryCollectionReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,13 +15,20 @@ import com.eletronicodigitalmobile.domain.Cidade;
 import com.eletronicodigitalmobile.domain.Cliente;
 import com.eletronicodigitalmobile.domain.Endereco;
 import com.eletronicodigitalmobile.domain.Estado;
+import com.eletronicodigitalmobile.domain.Pagamento;
+import com.eletronicodigitalmobile.domain.PagamentoComBoleto;
+import com.eletronicodigitalmobile.domain.PagamentoComCartao;
+import com.eletronicodigitalmobile.domain.Pedido;
 import com.eletronicodigitalmobile.domain.Produto;
+import com.eletronicodigitalmobile.domain.enums.EstadoPagamento;
 import com.eletronicodigitalmobile.domain.enums.TipoCliente;
 import com.eletronicodigitalmobile.repositories.CategoriaRepository;
 import com.eletronicodigitalmobile.repositories.CidadeRepository;
 import com.eletronicodigitalmobile.repositories.ClienteRepository;
 import com.eletronicodigitalmobile.repositories.EnderecoRepository;
 import com.eletronicodigitalmobile.repositories.EstadoRepository;
+import com.eletronicodigitalmobile.repositories.PagamentoRepository;
+import com.eletronicodigitalmobile.repositories.PedidoRepository;
 import com.eletronicodigitalmobile.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -42,6 +51,13 @@ public class EletronicodigitalmobileApplication  implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired 
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
+	
 	
 
 	public static void main(String[] args) {
@@ -92,6 +108,22 @@ public class EletronicodigitalmobileApplication  implements CommandLineRunner{
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("16/12/2019 21:09"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("17/12/2019 05:09"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 10:20"),null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 	}
 
 }
