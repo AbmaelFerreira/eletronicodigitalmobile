@@ -15,6 +15,7 @@ import com.eletronicodigitalmobile.domain.Cidade;
 import com.eletronicodigitalmobile.domain.Cliente;
 import com.eletronicodigitalmobile.domain.Endereco;
 import com.eletronicodigitalmobile.domain.Estado;
+import com.eletronicodigitalmobile.domain.ItemPedido;
 import com.eletronicodigitalmobile.domain.Pagamento;
 import com.eletronicodigitalmobile.domain.PagamentoComBoleto;
 import com.eletronicodigitalmobile.domain.PagamentoComCartao;
@@ -27,6 +28,7 @@ import com.eletronicodigitalmobile.repositories.CidadeRepository;
 import com.eletronicodigitalmobile.repositories.ClienteRepository;
 import com.eletronicodigitalmobile.repositories.EnderecoRepository;
 import com.eletronicodigitalmobile.repositories.EstadoRepository;
+import com.eletronicodigitalmobile.repositories.ItemPedidoRepository;
 import com.eletronicodigitalmobile.repositories.PagamentoRepository;
 import com.eletronicodigitalmobile.repositories.PedidoRepository;
 import com.eletronicodigitalmobile.repositories.ProdutoRepository;
@@ -57,6 +59,10 @@ public class EletronicodigitalmobileApplication  implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
+	
 	
 	
 
@@ -124,6 +130,20 @@ public class EletronicodigitalmobileApplication  implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
+		
 	}
 
 }
