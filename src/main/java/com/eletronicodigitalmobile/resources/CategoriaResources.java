@@ -61,5 +61,4 @@ public class CategoriaResources {
 		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
 			return ResponseEntity.ok().body(listDto);
 	}
-
 }
