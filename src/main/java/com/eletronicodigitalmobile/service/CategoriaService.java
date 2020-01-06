@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.eletronicodigitalmobile.domain.Categoria;
+import com.eletronicodigitalmobile.dto.CategoriaDTO;
 import com.eletronicodigitalmobile.repositories.CategoriaRepository;
 import com.eletronicodigitalmobile.service.exceptions.DateIntegratyException;
 import com.eletronicodigitalmobile.service.exceptions.ObjectNotFoundException;
@@ -21,29 +22,22 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	
-	
+	 
 	public Categoria find(Integer id) { 
 		Optional<Categoria> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     } 
 	
-	
-	
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
 	
-	
-	
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
 	}
-	
-	
 	
 	public void delete(Integer id) {
 		find(id);
@@ -62,4 +56,10 @@ public class CategoriaService {
 		PageRequest pageRequest =  PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy );
 		return repo.findAll(pageRequest);
 	} 	
+	
+	//Metodo auxiliar que estancia uma Categoria apartir de um DTO
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
+	}
+	
 }
