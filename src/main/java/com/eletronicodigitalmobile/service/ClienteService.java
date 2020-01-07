@@ -71,9 +71,11 @@ public class ClienteService {
 		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null);
 	}
 	
+	
+	//Atualiza os dados de um cliente
 	private void updateDate(Cliente newObj,Cliente obj) {
 		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());;
+		newObj.setEmail(obj.getEmail());
 	}
 
 }
