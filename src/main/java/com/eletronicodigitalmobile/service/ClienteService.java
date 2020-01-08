@@ -9,10 +9,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.eletronicodigitalmobile.domain.Cidade;
 import com.eletronicodigitalmobile.domain.Cliente;
+import com.eletronicodigitalmobile.domain.Endereco;
+import com.eletronicodigitalmobile.domain.enums.TipoCliente;
 import com.eletronicodigitalmobile.dto.ClienteDTO;
+import com.eletronicodigitalmobile.dto.ClienteNewDTO;
+import com.eletronicodigitalmobile.repositories.CidadeRepository;
 import com.eletronicodigitalmobile.repositories.ClienteRepository;
+import com.eletronicodigitalmobile.repositories.EnderecoRepository;
 import com.eletronicodigitalmobile.service.exceptions.DateIntegratyException;
 import com.eletronicodigitalmobile.service.exceptions.ObjectNotFoundException;
 
@@ -23,14 +30,32 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 	
+	//Injeção de dependencia
+	@Autowired
+	private CidadeRepository cidaderepository;
 	
-	//Pesquisa por ID
+	//Injeção de dependencia
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
+	
+	//Busca por ID
 	public Cliente find(Integer id) { 
 		Optional<Cliente> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     } 
 	
+	
+	//Insere uma novo Cliente		
+		@Transactional
+		public Cliente insert(Cliente obj) {
+			obj.setId(null);
+			obj = repo.save(obj);
+			enderecoRepository.saveAll(obj.getEnderecos());
+			return obj;
+		}
+		
 
 	//Atualização
 	public Cliente update(Cliente obj) {
@@ -62,8 +87,7 @@ public class ClienteService {
 		PageRequest pageRequest =  PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy );
 		return repo.findAll(pageRequest);
 	} 	
-	
-	
+
 	
 	//Metodo auxiliar que estancia uma Cliente apartir de um DTO  
 	public Cliente fromDTO(ClienteDTO objDTO) {
@@ -71,6 +95,30 @@ public class ClienteService {
 		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null);
 	}
 	
+	
+	//Metodo auxiliar que estancia um NOVO Cliente apartir de um ClienteNewDTO  
+		public Cliente fromDTO(ClienteNewDTO objDTO) {
+			
+			Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), TipoCliente.toEnum(objDTO.getTipo()));
+			
+			Cidade cid = new Cidade(objDTO.getCidadeId(), null, null);
+			
+			Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), cli, cid);
+			
+			cli.getEnderecos().add(end);
+			
+			cli.getTelefones().add(objDTO.getTelefone1());
+			
+			if (objDTO.getTelefone2()!=null) {
+				cli.getTelefones().add(objDTO.getTelefone2());
+			}
+			if (objDTO.getTelefone3()!=null) {
+				cli.getTelefones().add(objDTO.getTelefone3());
+			}
+			return cli;
+		}
+		
+		
 	
 	//Atualiza os dados de um cliente
 	private void updateDate(Cliente newObj,Cliente obj) {
