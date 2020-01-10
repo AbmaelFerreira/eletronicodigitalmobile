@@ -2,22 +2,50 @@ package com.eletronicodigitalmobile.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.eletronicodigitalmobile.service.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	
+	@NotEmpty(message = " Preenchimento obrigatorio")
+	@Length(min = 5, max = 120, message = " Otamanho deve ser entre 5 e 120 caracteres ")
 	private String nome;
+	
+	@NotEmpty(message = " Preenchimento obrigatorio")
+	@Email(message = " Email inválido")
 	private String email;
+	
+	//Existe uma validação somente  para se for somente @CPF ou @CNPJ
+	@NotEmpty(message = " Preenchimento obrigatorio")
 	private String cpfOuCnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message = " Preenchimento obrigatorio")
 	private String logradouro;
+	
+	@NotEmpty(message = " Preenchimento obrigatorio")
 	private String numero;
+	
 	private String complemento;
+	
 	private String bairro;
+	
+	@NotEmpty(message = " Preenchimento obrigatorio")
 	private String cep;
 	
+	@NotEmpty(message = " Preenchimento obrigatorio")
 	private String telefone1;
+	
 	private String telefone2;
+	
 	private String telefone3;
 	
 	private Integer cidadeId;
