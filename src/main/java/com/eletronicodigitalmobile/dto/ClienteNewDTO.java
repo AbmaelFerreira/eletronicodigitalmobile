@@ -18,7 +18,7 @@ public class ClienteNewDTO implements Serializable{
 	@Length(min = 5, max = 120, message = " Otamanho deve ser entre 5 e 120 caracteres ")
 	private String nome;
 	
-	//@Email(message = " Email inválido")
+	@Email(message = " Email inválido")
 	@NotEmpty(message = " Preenchimento obrigatorio")
 	private String email;
 	
