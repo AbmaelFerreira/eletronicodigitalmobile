@@ -67,6 +67,7 @@ public class CategoriaResources {
 	}
 	
 	
+	
 	@RequestMapping(value = "/pages",	  method=RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0")       Integer page, 
