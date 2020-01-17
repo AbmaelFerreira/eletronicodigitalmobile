@@ -19,17 +19,21 @@ public class Categoria implements Serializable{
 	private Integer id;
 	
 	private String nome;
+
+
 	
-	
+	//Relacionamento
 	
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>() ;
 	
 	
+
 	//Metodo construtores sem argumento
 	public Categoria() {}
 	
-	
+
+
 	//Metodo construtor
 	public Categoria(Integer id, String nome) {
 		super();
@@ -40,8 +44,6 @@ public class Categoria implements Serializable{
 	
 	
 	//Metodos gettes  e settes
-	
-	
 	
 	public Integer getId() {
 		return id;

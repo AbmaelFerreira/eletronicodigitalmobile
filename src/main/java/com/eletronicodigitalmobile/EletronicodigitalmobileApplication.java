@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EletronicodigitalmobileApplication  implements CommandLineRunner{
 	
 	
-	
-	
-	
-
 	public static void main(String[] args) {
 		SpringApplication.run(EletronicodigitalmobileApplication.class, args);
 	}
