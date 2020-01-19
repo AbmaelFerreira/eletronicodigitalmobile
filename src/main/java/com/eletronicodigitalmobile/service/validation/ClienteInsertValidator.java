@@ -2,13 +2,9 @@ package com.eletronicodigitalmobile.service.validation;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.eletronicodigitalmobile.domain.Cliente;
 import com.eletronicodigitalmobile.domain.enums.TipoCliente;
 import com.eletronicodigitalmobile.dto.ClienteNewDTO;

@@ -15,7 +15,6 @@ import com.eletronicodigitalmobile.service.exceptions.ObjectNotFoundException;
 @ControllerAdvice
 public class ResourcesExceptionHandler {
 	
-	
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request ){
 		StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
@@ -40,6 +39,4 @@ public class ResourcesExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
-	
-
 }

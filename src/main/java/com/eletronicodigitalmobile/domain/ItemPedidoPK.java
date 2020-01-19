@@ -19,8 +19,6 @@ public class ItemPedidoPK implements Serializable{
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
 	
-	
-	
 	public Produto getProduto() {
 		return produto;
 	}
@@ -65,8 +63,4 @@ public class ItemPedidoPK implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-
 }

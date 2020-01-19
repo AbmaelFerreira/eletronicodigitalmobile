@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eletronicodigitalmobile.domain.Produto;
 import com.eletronicodigitalmobile.dto.ProdutoDTO;
 import com.eletronicodigitalmobile.resources.utils.URL;
@@ -22,7 +21,6 @@ public class ProdutoResources {
 	
 	@Autowired
 	private ProdutoService service;
-	
 	
 	@RequestMapping(value ="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Produto> find(@PathVariable Integer id) {
@@ -44,7 +42,4 @@ public class ProdutoResources {
 		Page<ProdutoDTO> listDto = list.map(obj -> new ProdutoDTO(obj));
 			return ResponseEntity.ok().body(listDto);
 	}
-	
-	
-
 }

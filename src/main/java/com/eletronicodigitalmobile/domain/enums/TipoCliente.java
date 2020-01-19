@@ -10,9 +10,6 @@ public enum TipoCliente {
 	private TipoCliente(int cod, String descrica) {
 		this.cod = cod;
 		this.descricao = descrica;
-		
-		
-		
 	}
 
 	public int getCod() {
@@ -23,15 +20,14 @@ public enum TipoCliente {
 		return descricao;
 	}
 	
-			public static TipoCliente toEnum(Integer cod) {
-				if(cod == null) { return null;	}
+	public static TipoCliente toEnum(Integer cod) {
+		if(cod == null) { return null;	}
 			
-			
-			for(TipoCliente x : TipoCliente.values()) {
+		  for(TipoCliente x : TipoCliente.values()) {
 				if (cod.equals(x.getCod())) {
 					return x;
 				}
-			}
+		  }
 			throw new IllegalArgumentException("Id invalido: "+ cod);
 		}
 }

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.eletronicodigitalmobile.domain.ItemPedido;
 import com.eletronicodigitalmobile.domain.PagamentoComBoleto;
 import com.eletronicodigitalmobile.domain.Pedido;
@@ -33,9 +32,6 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	
-	
-	
 	public Pedido find(Integer id) { 
 		Optional<Pedido> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -62,8 +58,5 @@ public class PedidoService {
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
 		return obj;
-		
 	}
-	
-	
 }

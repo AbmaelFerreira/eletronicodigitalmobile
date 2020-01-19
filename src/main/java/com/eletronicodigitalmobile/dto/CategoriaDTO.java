@@ -1,11 +1,8 @@
 package com.eletronicodigitalmobile.dto;
 
 import java.io.Serializable;
-
 import javax.validation.constraints.NotEmpty;
-
 import org.hibernate.validator.constraints.Length;
-
 import com.eletronicodigitalmobile.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
@@ -17,10 +14,7 @@ public class CategoriaDTO implements Serializable{
 	@Length(min = 5, max = 80, message = " O tamanho deve ser entre 5 e 80caracteres ")
 	private String nome;
 	
-	
 	//Metodo construtor
-	
-	
 	public CategoriaDTO() {
 		
 	}
@@ -31,7 +25,6 @@ public class CategoriaDTO implements Serializable{
 	}
 	
 	//Metodos getteres and setteres
-
 	public Integer getId() {
 		return id;
 	}
@@ -47,7 +40,4 @@ public class CategoriaDTO implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
-	
 }

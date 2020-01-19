@@ -10,19 +10,14 @@ public class FieldMessage implements Serializable{
 	
 	public FieldMessage() {
 	}
-	
-	
 
 	public FieldMessage(String fieldName, String message) {
 		super();
 		this.fieldName = fieldName;
 		this.message = message;
 	}
-
 	
 	//Metods gettes and settes
-
-
 	public String getFieldName() {
 		return fieldName;
 	}
@@ -38,5 +33,4 @@ public class FieldMessage implements Serializable{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 }

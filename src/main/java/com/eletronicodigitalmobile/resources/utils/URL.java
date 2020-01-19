@@ -2,7 +2,7 @@ package com.eletronicodigitalmobile.resources.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-//import java.util.ArrayList;  //Utilizandoo codigo comentado do java 7
+//import java.util.ArrayList;  //Utilizandoo codigo comentado do java 7 que foi substituido pelo lambda
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

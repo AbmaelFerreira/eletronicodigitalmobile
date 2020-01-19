@@ -38,14 +38,12 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-	
 	//Busca por ID
 	public Cliente find(Integer id) { 
 		Optional<Cliente> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     } 
-	
 	
 	//Insere uma novo Cliente		
 		@Transactional
@@ -55,7 +53,6 @@ public class ClienteService {
 			enderecoRepository.saveAll(obj.getEnderecos());
 			return obj;
 		}
-		
 
 	//Atualização
 	public Cliente update(Cliente obj) {
@@ -63,7 +60,6 @@ public class ClienteService {
 		updateDate(newObj,obj);
 		return repo.save(newObj);
 	}
-	
 	
 	//Exclusão
 	public void delete(Integer id) {
@@ -74,7 +70,6 @@ public class ClienteService {
 			throw new  DateIntegratyException("Não é possível excluir, pois ha entidades relacionadas");
 		}
 	}
-	
 	
 	//Pesquisa TUDO
 	public List<Cliente> findAll(){
@@ -87,14 +82,12 @@ public class ClienteService {
 		PageRequest pageRequest =  PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy );
 		return repo.findAll(pageRequest);
 	} 	
-
 	
 	//Metodo auxiliar que estancia uma Cliente apartir de um DTO  
 	public Cliente fromDTO(ClienteDTO objDTO) {
 		
 		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null);
 	}
-	
 	
 	//Metodo auxiliar que estancia um NOVO Cliente apartir de um ClienteNewDTO  
 		public Cliente fromDTO(ClienteNewDTO objDTO) {
@@ -118,8 +111,6 @@ public class ClienteService {
 			return cli;
 		}
 		
-		
-	
 	//Atualiza os dados de um cliente
 	private void updateDate(Cliente newObj,Cliente obj) {
 		newObj.setNome(obj.getNome());
