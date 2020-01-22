@@ -34,10 +34,10 @@ public class Cliente implements Serializable{
 	private String email;
 	
 	private String cpfOuCnpj;
+
 	private Integer tipo;
 	
-	
-	
+	//Associações
 	
 	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -49,6 +49,8 @@ public class Cliente implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
+
+	//Construtores
 	
 	public Cliente() {
 		
@@ -62,6 +64,8 @@ public class Cliente implements Serializable{
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
+
+	//Meetodos gettes and settes
 
 	public Integer getId() {
 		return id;
@@ -133,6 +137,7 @@ public class Cliente implements Serializable{
 		this.pedidos = pedidos;
 	}
 
+	//Hascode and equals
 
 	@Override
 	public int hashCode() {
