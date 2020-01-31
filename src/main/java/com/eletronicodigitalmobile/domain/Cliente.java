@@ -28,6 +28,7 @@ public class Cliente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	
 	@Column(unique = true)
@@ -36,6 +37,7 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 
 	private Integer tipo;
+	
 	
 	//Associações
 	
@@ -50,6 +52,7 @@ public class Cliente implements Serializable{
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
+	
 	//Construtores
 	
 	public Cliente() {

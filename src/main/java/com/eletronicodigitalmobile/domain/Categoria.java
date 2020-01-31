@@ -43,6 +43,7 @@ public class Categoria implements Serializable{
 	
 	
 	
+	
 	//Metodos gettes  e settes
 	
 	public Integer getId() {

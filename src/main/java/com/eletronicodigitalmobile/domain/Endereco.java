@@ -24,6 +24,7 @@ public class Endereco implements Serializable{
 	private String bairro;
 	private String cep;
 	
+	
 	//Associações
 	
 	@JsonIgnore

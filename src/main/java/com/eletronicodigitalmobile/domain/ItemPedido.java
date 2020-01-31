@@ -21,6 +21,8 @@ public class ItemPedido implements Serializable{
 	private Integer quantidade;
 	private Double preco;
 	
+	
+	//Construtores
 	public ItemPedido() {
 		
 	}
@@ -33,6 +35,8 @@ public class ItemPedido implements Serializable{
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+	
+	//Metodo da regra de negócio
 	public double getSubtotal() {
 		return (preco - desconto) * quantidade;
 	}

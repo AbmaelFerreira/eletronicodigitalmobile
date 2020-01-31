@@ -19,6 +19,8 @@ public class ItemPedidoPK implements Serializable{
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
 	
+	//getteres and setteres
+	
 	public Produto getProduto() {
 		return produto;
 	}
@@ -34,6 +36,8 @@ public class ItemPedidoPK implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

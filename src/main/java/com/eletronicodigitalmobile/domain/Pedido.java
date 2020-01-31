@@ -34,7 +34,7 @@ public class Pedido implements Serializable{
 
 	
 	
-			//Relacionamentos
+			//Relacionamentos ou Associações
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")	
 	private Pagamento pagamento;
@@ -52,6 +52,7 @@ public class Pedido implements Serializable{
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	
+	//Construtores
 	public Pedido() {
 		
 	}
@@ -65,6 +66,7 @@ public class Pedido implements Serializable{
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 	
+	//Metodos da regra de negócio
 	public double getValorTotal() {
 		double soma = 0.0;
 		for(ItemPedido ip : itens) {
@@ -73,6 +75,8 @@ public class Pedido implements Serializable{
 	return soma;
 	}
 
+	//Getteres and setteres
+	
 	public Integer getId() {
 		return id;
 	}

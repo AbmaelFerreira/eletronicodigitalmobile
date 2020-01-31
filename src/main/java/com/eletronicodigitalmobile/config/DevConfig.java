@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.eletronicodigitalmobile.service.DbService;
+import com.eletronicodigitalmobile.service.EmailService;
+import com.eletronicodigitalmobile.service.SmtpEmailService;
 
 @Configuration
 @Profile("dev")
@@ -26,6 +28,11 @@ public class DevConfig {
 		}
 		dbservice.instantiateDatabase();
 		return true;
+	}
+	
+	@Bean
+	public EmailService emailservice() {
+		return new SmtpEmailService();
 	}
 
 }
