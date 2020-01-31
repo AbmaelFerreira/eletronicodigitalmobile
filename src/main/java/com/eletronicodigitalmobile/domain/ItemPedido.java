@@ -37,6 +37,7 @@ public class ItemPedido implements Serializable{
 	}
 	
 	//Metodo da regra de negócio
+	
 	public double getSubtotal() {
 		return (preco - desconto) * quantidade;
 	}
