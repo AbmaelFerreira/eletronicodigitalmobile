@@ -57,11 +57,9 @@ public abstract class AbstractEmailService implements EmailService{
 		}catch ( MessagingException e) {
 			sendOrderConfirmationEmail(obj);
 		}
-		
 	}
 
 	protected MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException {
-		
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);
 		
@@ -71,8 +69,5 @@ public abstract class AbstractEmailService implements EmailService{
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
 		mmh.setText(htmlFromTemplatePedido(obj), true);
 		return mimeMessage;
-		
 	}
-	
-	
 }
