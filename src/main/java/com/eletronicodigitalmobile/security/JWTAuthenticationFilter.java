@@ -23,7 +23,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	private JWTUtil jwtUtil;
 	
 	
-	//Iniciando os dois atributos pelo construtor
+	//Iniciando os dois atributos pelo CONSTRUTOR
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager,JWTUtil jwtUtil ) {
 		setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
 		
