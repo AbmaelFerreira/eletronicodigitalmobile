@@ -15,12 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eletronicodigitalmobile.domain.Cidade;
 import com.eletronicodigitalmobile.domain.Cliente;
 import com.eletronicodigitalmobile.domain.Endereco;
+import com.eletronicodigitalmobile.domain.enums.Perfil;
 import com.eletronicodigitalmobile.domain.enums.TipoCliente;
 import com.eletronicodigitalmobile.dto.ClienteDTO;
 import com.eletronicodigitalmobile.dto.ClienteNewDTO;
 import com.eletronicodigitalmobile.repositories.CidadeRepository;
 import com.eletronicodigitalmobile.repositories.ClienteRepository;
 import com.eletronicodigitalmobile.repositories.EnderecoRepository;
+import com.eletronicodigitalmobile.security.UserSS;
+import com.eletronicodigitalmobile.service.exceptions.AuthorizationException;
 import com.eletronicodigitalmobile.service.exceptions.DateIntegratyException;
 import com.eletronicodigitalmobile.service.exceptions.ObjectNotFoundException;
 
@@ -44,6 +47,12 @@ public class ClienteService {
 	
 	//Busca por ID
 	public Cliente find(Integer id) { 
+		
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()) ) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
