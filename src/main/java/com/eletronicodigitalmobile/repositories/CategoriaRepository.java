@@ -8,4 +8,5 @@ import com.eletronicodigitalmobile.domain.Categoria;
 @Repository
 public interface CategoriaRepository  extends JpaRepository<Categoria, Integer>{
 
+
 }
