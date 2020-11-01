@@ -63,7 +63,7 @@ public class Cliente implements Serializable{
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	
-	private String imageUrl;
+	
 
 	
 	//Construtores
@@ -196,12 +196,5 @@ public class Cliente implements Serializable{
 		return true;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
+	
 }
