@@ -39,6 +39,15 @@ public class ClienteResources {
 			return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value = "/email", method=RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email) {
+
+		Cliente obj = service.findByEmail(email);
+				
+	return ResponseEntity.ok().body(obj);
+	 }
+
+	
 	
 	//O POST É LIBERADO ATÉ PARA QUE NÃO ESTA LOGADO
 	@RequestMapping(method=RequestMethod.POST)
