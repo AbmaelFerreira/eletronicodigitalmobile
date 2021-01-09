@@ -1,7 +1,9 @@
 package com.eletronicodigitalmobile.resources;
 
 import java.net.URI;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.eletronicodigitalmobile.domain.Categoria;
+
 import com.eletronicodigitalmobile.domain.Pedido;
-import com.eletronicodigitalmobile.dto.CategoriaDTO;
 import com.eletronicodigitalmobile.service.PedidoService;
 
 @RestController

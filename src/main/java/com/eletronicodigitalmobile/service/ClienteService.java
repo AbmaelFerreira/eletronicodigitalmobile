@@ -23,7 +23,6 @@ import com.eletronicodigitalmobile.domain.enums.Perfil;
 import com.eletronicodigitalmobile.domain.enums.TipoCliente;
 import com.eletronicodigitalmobile.dto.ClienteDTO;
 import com.eletronicodigitalmobile.dto.ClienteNewDTO;
-import com.eletronicodigitalmobile.repositories.CidadeRepository;
 import com.eletronicodigitalmobile.repositories.ClienteRepository;
 import com.eletronicodigitalmobile.repositories.EnderecoRepository;
 import com.eletronicodigitalmobile.security.UserSS;
@@ -42,8 +41,8 @@ public class ClienteService {
 	private ClienteRepository repo;
 
 	// Injeção de dependencia
-	@Autowired
-	private CidadeRepository cidaderepository;
+	//@Autowired
+	//private CidadeRepository cidaderepository;
 
 	// Injeção de dependencia
 	@Autowired
