@@ -15,9 +15,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+//import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
 
 import com.eletronicodigitalmobile.security.JWTAuthenticationFilter;
 import com.eletronicodigitalmobile.security.JWTAuthorizationFilter;
@@ -37,6 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private Environment env;
+	
+	
 	
 	private static final String[] PUBLIC_MATCHERS =	{
 			"/h2-console/**"
@@ -63,29 +69,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
-		.antMatchers(HttpMethod.GET,  PUBLIC_MATCHERS_GET).permitAll()
+			.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+			.antMatchers(HttpMethod.GET,  PUBLIC_MATCHERS_GET).permitAll()
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
 			.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter( authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter( authenticationManager(), jwtUtil,userDetailService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 	}
 	
 	
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordEncoder());
+		
 	}
 	
-	@Bean
+	
+	
+	
+	/*
+	 * @Bean Foi feito uma nova Classe CorsConfiguration
+	 
 	CorsConfigurationSource  corsconfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+		
+		//configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD","TRACE", "CONNECT"));
+		//configuration.setAllowedMethods(Arrays.asList("*"));
+		//configuration.setAllowedOrigins(Arrays.asList("http://localhost:8100"));
+		//configuration.setAllowedOrigins(Arrays.asList("*"));
+		//configuration.addAllowedHeader("Access-Control-Allow-Origin");
+		
 		
 		final UrlBasedCorsConfigurationSource source = new  UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
+		return source; 
+		
+	} */
+	
+	
+	
 	
 	@Bean
 	public  BCryptPasswordEncoder  bCryptPasswordEncoder() {

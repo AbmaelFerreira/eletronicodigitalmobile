@@ -1,10 +1,12 @@
 package com.eletronicodigitalmobile.resources;
 
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,8 @@ import com.eletronicodigitalmobile.security.UserSS;
 import com.eletronicodigitalmobile.service.AuthService;
 import com.eletronicodigitalmobile.service.UserService;
 
+//@CrossOrigin("${origem-permitida}")
+//@CrossOrigin
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthResource {

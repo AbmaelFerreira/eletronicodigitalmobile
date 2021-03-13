@@ -1,15 +1,18 @@
 package com.eletronicodigitalmobile.security;
 
 import java.util.Collection;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.eletronicodigitalmobile.domain.enums.Perfil;
 
+@CrossOrigin("${origem-permitida}")
 public class UserSS implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;

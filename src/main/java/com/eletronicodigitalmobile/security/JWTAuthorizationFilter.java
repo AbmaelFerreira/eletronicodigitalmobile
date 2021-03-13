@@ -7,18 +7,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 	
 	private JWTUtil jwtutil;
 	
 	UserDetailsService userdetailservice;
+	
+	
+	
 
 	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtutil, UserDetailsService userdetailservice) {
 		super(authenticationManager);
@@ -50,4 +55,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 		}
 		return null;
 	}
+	
+	
 }
