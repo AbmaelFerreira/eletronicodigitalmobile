@@ -26,6 +26,7 @@ public class EstadoResource {
 
 	@Autowired
 	private CidadeService cidadeService;
+	
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<EstadoDTO>> findAll() {
@@ -37,6 +38,7 @@ public class EstadoResource {
 		return ResponseEntity.ok().body(listDto);
 
 	}
+	
 
 	@RequestMapping(value="/{estadoId}/cidades", method=RequestMethod.GET)
 
