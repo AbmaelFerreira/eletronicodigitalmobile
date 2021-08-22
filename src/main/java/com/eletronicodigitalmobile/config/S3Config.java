@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
@@ -27,8 +28,10 @@ public class S3Config {
 	@Bean
 	public AmazonS3 s3client() {
 		
-		BasicAWSCredentials awsCred = new BasicAWSCredentials(awsId, awsKey);
+		//BasicAWSCredentials awsCred = new BasicAWSCredentials(awsId, awsKey);
 		
+		AWSCredentials awsCred = new BasicAWSCredentials(awsId, awsKey);
+		/*
 		AmazonS3  s3client = AmazonS3ClientBuilder.standard()
 								.withRegion(Regions.fromName(region))
 								.withCredentials(new AWSStaticCredentialsProvider(awsCred))
@@ -36,6 +39,12 @@ public class S3Config {
 
 		return s3client;
 		
+		*/
+		
+		return  AmazonS3ClientBuilder.standard()
+				.withRegion(Regions.fromName(region))
+				.withCredentials(new AWSStaticCredentialsProvider(awsCred))
+				.build();
 	}
 
 }

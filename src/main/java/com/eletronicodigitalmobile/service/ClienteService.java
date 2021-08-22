@@ -1,6 +1,7 @@
 package com.eletronicodigitalmobile.service;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -168,7 +169,7 @@ public class ClienteService {
 		newObj.setEmail(obj.getEmail());
 	}
 
-	public URI uploadProfilePincture(MultipartFile multipartFile) {
+	public URI uploadProfilePincture(MultipartFile multipartFile) throws IOException {
 
 		UserSS user = UserService.authenticated();
 
@@ -181,10 +182,9 @@ public class ClienteService {
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
 
-		String fileName = prefix + user.getId() + "jpg";
+		String fileName = prefix + user.getId() + ".jpg";
 
-		return s3Service.upLoadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 
 	}
-
 }

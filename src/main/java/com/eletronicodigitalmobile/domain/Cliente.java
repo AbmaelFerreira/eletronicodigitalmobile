@@ -117,18 +117,16 @@ public class Cliente implements Serializable{
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
-	}
-
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-
+		public TipoCliente getTipo() {
+			return TipoCliente.toEnum(tipo);
+		}
+	
+		public void setTipo(TipoCliente tipo) {
+			this.tipo = tipo.getCod();
+		}
+	
+		
+	
 	public String getSenha() {
 		return senha;
 	}
@@ -136,6 +134,7 @@ public class Cliente implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
 	
 	public Set<Perfil> getPerfis() {
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());

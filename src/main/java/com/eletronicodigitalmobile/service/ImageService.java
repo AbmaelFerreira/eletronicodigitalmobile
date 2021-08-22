@@ -19,6 +19,8 @@ import com.eletronicodigitalmobile.service.exceptions.FileException;
 @Service
 public class ImageService {
 
+	
+	//METODO PRINCIPAL
 	public BufferedImage getJpgImageFromFile(MultipartFile uploadedFile) {
 
 		String ext = FilenameUtils.getExtension(uploadedFile.getOriginalFilename());
@@ -40,6 +42,9 @@ public class ImageService {
 		}
 	}
 
+	
+	
+	
 	public BufferedImage pngToJpg(BufferedImage img) {
 
 		BufferedImage jpgImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -47,6 +52,9 @@ public class ImageService {
 		return jpgImage;
 
 	}
+	
+	
+	
 
 	public InputStream getInputStream(BufferedImage img, String extension) {
 		try {
@@ -60,6 +68,9 @@ public class ImageService {
 			throw new FileException("Erro ao ler o arquivo");
 		}
 	}
+	
+	
+	
 
 	public BufferedImage cropSquare(BufferedImage sourceImg) {
 
@@ -68,6 +79,8 @@ public class ImageService {
 		return Scalr.crop(sourceImg, (sourceImg.getWidth() / 2) - (min / 2), (sourceImg.getHeight() / 2) - (min / 2),
 				min, min);
 	}
+	
+	
 
 	public BufferedImage resize(BufferedImage sourceImg, int size) {
 		return Scalr.resize(sourceImg, Scalr.Method.ULTRA_QUALITY, size);
