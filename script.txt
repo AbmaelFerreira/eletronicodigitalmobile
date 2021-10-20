@@ -1,3 +1,4 @@
 INSERT INTO CATEGORIA (NOME) VALUES ('Informatica');
+INSERT INTO CATEGORIA (NOME) VALUES ('Cama Mesa e Banho');
 
 select * from categoria
