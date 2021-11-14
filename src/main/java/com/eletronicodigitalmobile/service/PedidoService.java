@@ -1,6 +1,7 @@
 package com.eletronicodigitalmobile.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,12 @@ public class PedidoService {
 		Optional<Pedido> obj = repo.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
+	} 
+	
+	//Metodo que busca todos os pedidos
+	public List<Pedido> findAll() { 
+		List<Pedido> lista = repo.findAll(); 
+		return lista;
 	} 
 	
 	

@@ -1,6 +1,7 @@
 package com.eletronicodigitalmobile.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -31,6 +32,12 @@ public class PedidoResources {
 				return ResponseEntity.ok().body(obj);
 	}
 	
+	/*
+		@RequestMapping(method=RequestMethod.GET)
+		public  List<Pedido> findAll() {
+			return	service.findAll();
+		}
+	*/
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert (@Valid @RequestBody Pedido obj){
@@ -40,6 +47,7 @@ public class PedidoResources {
 		return ResponseEntity.created(uri).build();		
 	}
 	
+
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<Pedido>> findPage(
 			@RequestParam(value = "page", defaultValue = "0")       Integer page, 
@@ -49,4 +57,5 @@ public class PedidoResources {
 		Page<Pedido> list = service.findPage(page,linesPerPage,orderBy,direction);
 			return ResponseEntity.ok().body(list);
 	}
+	
 }
